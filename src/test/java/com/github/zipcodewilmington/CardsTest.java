@@ -2,9 +2,7 @@ package com.github.zipcodewilmington;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +22,7 @@ class CardsTest {
     @Test
     public void FaceDownTest() {
         Deck deck = new Deck();
-        String expected = "Face of Down";
+        String expected = "null of null";
         String actual = String.valueOf(deck.faceDown);
         assertEquals(expected, actual);
     }
@@ -33,14 +31,14 @@ class CardsTest {
         Deck deck = new Deck();
         deck.dealCardFaceDown(1);
         String expected = String.valueOf(deck.temp[0]);
-        String actual = "ACE of HEARTS";
+        String actual = "TWO of CLUBS";
         assertEquals(expected, actual);
     }
     @Test
     public void flipTest() {
         Deck deck = new Deck();
         deck.dealCardFaceDown(1);
-        String expected = "ACE of HEARTS";
+        String expected = "TWO of CLUBS";
         String actual = String.valueOf(deck.reveal(0,true));
         assertEquals(expected,actual);
     }
