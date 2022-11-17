@@ -2,44 +2,21 @@ package com.github.zipcodewilmington;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 class CardsTest {
 
     @Test
-    public void deckOfCardsTest() {
-        Deck deck = new Deck();
-        System.out.println(List.of(deck.dealCard(52)));
+    public void toStringTest(){
+        Cards card = new Cards(Suits.HEARTS, 1);
+        String expected = "Ace of HEARTS";
+        assertEquals(expected, card.toString());
     }
     @Test
-    public void shuffleTest() {
-        Deck deck = new Deck();
-        deck.shuffle();
-        System.out.println(List.of(deck.dealCard(52)));
+    public void getNumberTest(){
+        Cards card = new Cards(Suits.HEARTS, 1);
+        int expected = card.getNumber();
+        assertEquals(1, expected);
     }
-    @Test
-    public void FaceDownTest() {
-        Deck deck = new Deck();
-        String expected = "null of null";
-        String actual = String.valueOf(deck.faceDown);
-        assertEquals(expected, actual);
-    }
-    @Test
-    public void dealCardFaceDownTest() {
-        Deck deck = new Deck();
-        deck.dealCardFaceDown(1);
-        String expected = String.valueOf(deck.temp[0]);
-        String actual = "TWO of CLUBS";
-        assertEquals(expected, actual);
-    }
-    @Test
-    public void flipTest() {
-        Deck deck = new Deck();
-        deck.dealCardFaceDown(1);
-        String expected = "TWO of CLUBS";
-        String actual = String.valueOf(deck.reveal(0,true));
-        assertEquals(expected,actual);
-    }
+
 }
