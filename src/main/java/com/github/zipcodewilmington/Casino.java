@@ -4,12 +4,12 @@ import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
-import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
 import com.github.zipcodewilmington.casino.players.RoulettePlayer;
-import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 import com.github.zipcodewilmington.casino.players.SlotsPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
+
+import java.util.Scanner;
 
 /**
  * Created by leon on 7/21/2020.
@@ -30,14 +30,44 @@ public class Casino implements Runnable {
                 boolean isValidLogin = casinoAccount != null;
                 if (isValidLogin) {
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
-                    if (gameSelectionInput.equals("SLOTS")) {
-                        play(new SlotsGame(), new SlotsPlayer());
-                    } else if (gameSelectionInput.equals("NUMBERGUESS")) {
-                        play(new NumberGuessGame(), new RoulettePlayer());
-                    } else {
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.println("Please select a game");
+                    System.out.println("[1 = Poker] [2 = Roulette] [3 = Blackjack] [4 = War] " +
+                            "[5 = Slots] [6 = GoFish] [7 = CardMemory] [8 = RPSLS]");
+
+                    int userInput = scanner.nextInt();
+
+                    switch(userInput){
+                        case 1:
+                            System.out.println("You chose Poker");
+                            break;
+                        case 2:
+                            System.out.println("You chose Roulette");
+                            break;
+                        case 3:
+                            System.out.println("You chose Blackjack");
+                            break;
+                        case 4:
+                            System.out.println("You chose War");
+                            break;
+                        case 5:
+                            System.out.println("You chose Slots");
+                            break;
+                        case 6:
+                            System.out.println("You chose GoFish");
+                            break;
+                        case 7:
+                            System.out.println("You chose CardMemory");
+                            break;
+                        case 8:
+                            System.out.println("You chose RPSLS");
+                            break;
+                        default:
+                            System.out.println("Please Select a game");
+                            break;
                         // TODO - implement better exception handling
-                        String errorMessage = "[ %s ] is an invalid game selection";
-                        throw new RuntimeException(String.format(errorMessage, gameSelectionInput));
+                        //String errorMessage = "[ %s ] is an invalid game selection";
+                        //throw new RuntimeException(String.format(errorMessage, gameSelectionInput));
                     }
                 } else {
                     // TODO - implement better exception handling
