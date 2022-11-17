@@ -1,10 +1,9 @@
 package com.github.zipcodewilmington;
 
-import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
-public class Deck {
+public class Deck{
     private Stack<Cards> deck;
     private static int currentCard;
     private static final int NUMBER_OF_CARDS = 52;
@@ -25,6 +24,7 @@ public class Deck {
                 Suits suits = Suits.values()[j];
                 Cards card = new Cards(values, suits);
                 this.deck.add(card);
+                System.out.println(deck);
             }
         }
     }
@@ -37,13 +37,15 @@ public class Deck {
             deck.set(j,temp[0]); //temp has ace of spades, deck[j] has king of clubs, deck[j] also has ace of spades
         }
     }
+    public Cards popper() {
+        return deck.pop();
+    }
     public Cards[] dealCard(int cardDealt) {
         Cards[] dealt = new Cards[cardDealt];
         for (int i = 0; i < cardDealt; i++) {
             if (currentCard < deck.size()) {
                 dealt[i] = deck.get(i);
                 currentCard++;
-
             } else {
                 return null;
             }

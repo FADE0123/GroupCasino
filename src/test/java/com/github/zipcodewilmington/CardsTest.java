@@ -14,6 +14,12 @@ class CardsTest {
         System.out.println(List.of(deck.dealCard(52)));
     }
     @Test
+    public void popperTest() {
+        Deck deck = new Deck();
+        deck.shuffle();
+        System.out.println(deck.popper());
+    }
+    @Test
     public void shuffleTest() {
         Deck deck = new Deck();
         deck.shuffle();
