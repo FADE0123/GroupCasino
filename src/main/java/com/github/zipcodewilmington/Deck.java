@@ -56,4 +56,7 @@ public class Deck{
         }
         System.out.printf("\t\t[%d other]\n", this.numberCards-numberToReveal);
     }
+    public int getNumberCards() {
+        return numberCards;
+    }
 }

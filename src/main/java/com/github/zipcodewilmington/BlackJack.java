@@ -76,15 +76,15 @@ public class BlackJack extends Deck {
                     }
                 }
             }
-            firstPlayer.handResult(true);
+            firstPlayer.cardReveal(true);
             System.out.print("\n");
-            secondPlayer.handResult(true);
+            secondPlayer.cardReveal(true);
             System.out.print("\n");
-            thirdPlayer.handResult(true);
+            thirdPlayer.cardReveal(true);
             System.out.print("\n");
-            fourthPlayer.handResult(true);
+            fourthPlayer.cardReveal(true);
             System.out.print("\n");
-            dealer.handResult(false);
+            dealer.cardReveal(false);
             System.out.println("\nCards are dealt\n");
 
             String response;
@@ -93,7 +93,7 @@ public class BlackJack extends Deck {
                 response = scanner.nextLine();
                 if(response.compareToIgnoreCase("H") == 0) {
                     firstPlayerDone = !firstPlayer.draw(BJDeck.dealCard());
-                    firstPlayer.handResult(true);
+                    firstPlayer.cardReveal(true);
                 } else if (response.compareToIgnoreCase("S") == 0) {
                     firstPlayerDone = true;
                 }
@@ -106,7 +106,7 @@ public class BlackJack extends Deck {
                     response = scanner.nextLine();
                     if (response.compareToIgnoreCase("H") == 0) {
                         secondPlayerDone = !secondPlayer.draw(BJDeck.dealCard());
-                        secondPlayer.handResult(true);
+                        secondPlayer.cardReveal(true);
                     } else if (response.compareToIgnoreCase("S") == 0) {
                         secondPlayerDone = true;
                     }
@@ -120,7 +120,7 @@ public class BlackJack extends Deck {
                     response = scanner.nextLine();
                     if (response.compareToIgnoreCase("H") == 0) {
                         thirdPlayerDone = !thirdPlayer.draw(BJDeck.dealCard());
-                        thirdPlayer.handResult(true);
+                        thirdPlayer.cardReveal(true);
                     } else if (response.compareToIgnoreCase("S") == 0) {
                         thirdPlayerDone = true;
                     }
@@ -134,7 +134,7 @@ public class BlackJack extends Deck {
                     response = scanner.nextLine();
                     if (response.compareToIgnoreCase("H") == 0) {
                         fourthPlayerDone = !fourthPlayer.draw(BJDeck.dealCard());
-                        fourthPlayer.handResult(true);
+                        fourthPlayer.cardReveal(true);
                     } else if (response.compareToIgnoreCase("S") == 0) {
                         fourthPlayerDone = true;
                     }
@@ -144,22 +144,22 @@ public class BlackJack extends Deck {
                 if (dealer.getHandSum() < 17) {
                     System.out.println("Dealer hits\n");
                     dealerDone = !dealer.draw(BJDeck.dealCard());
-                    dealer.handResult(false);
+                    dealer.cardReveal(false);
                 } else {
                     System.out.println("Dealer stays\n");
                     dealerDone = true;
                 }
             }
 
-            firstPlayer.handResult(true);
+            firstPlayer.cardReveal(true);
             System.out.print("\n");
-            secondPlayer.handResult(true);
+            secondPlayer.cardReveal(true);
             System.out.print("\n");
-            thirdPlayer.handResult(true);
+            thirdPlayer.cardReveal(true);
             System.out.print("\n");
-            fourthPlayer.handResult(true);
+            fourthPlayer.cardReveal(true);
             System.out.print("\n");
-            dealer.handResult(true);
+            dealer.cardReveal(true);
             System.out.print("\n");
 
             int playerOneSum = firstPlayer.getHandSum();

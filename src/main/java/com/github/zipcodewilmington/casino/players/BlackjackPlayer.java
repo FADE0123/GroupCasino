@@ -4,7 +4,7 @@ import com.github.zipcodewilmington.Cards;
 
 public class BlackjackPlayer {
     private String name;
-    private Cards[] hand = new Cards[10];
+    private Cards[] hand = new Cards[5];
     private int numberCards;
     public BlackjackPlayer(String name) {
         this.name = name;
@@ -27,17 +27,15 @@ public class BlackjackPlayer {
     }
     public int getHandSum() {
         int handSum = 0;
-        int cardNumber;
         int numberAces = 0;
         for(int i = 0; i < this.numberCards; i++) {
-            cardNumber = this.hand[i].getNumber();
-            if(cardNumber == 1) {
+            if(this.hand[i].getNumber() == 1) {
                 numberAces++;
                 handSum += 11;
-            } else if (cardNumber > 10) {
+            } else if (this.hand[i].getNumber() > 10) {
                 handSum += 10;
             } else {
-                handSum += cardNumber;
+                handSum += this.hand[i].getNumber();
             }
         }
         while(handSum > 21 && numberAces > 0) {
@@ -46,7 +44,7 @@ public class BlackjackPlayer {
         }
         return handSum;
     }
-    public void handResult (boolean showHands) {
+    public void cardReveal (boolean showHands) {
         System.out.printf("%s's cards:\n", this.name);
         for(int i = 0; i < this.numberCards; i++) {
             if(i == 0 && !showHands) {
@@ -58,5 +56,11 @@ public class BlackjackPlayer {
     }
     public String getname() {
         return name;
+    }
+    public int getNumberCards() {
+        return numberCards;
+    }
+    public Cards getHand(int index) {
+        return hand[index];
     }
 }
