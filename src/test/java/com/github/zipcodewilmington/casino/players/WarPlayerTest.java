@@ -36,12 +36,6 @@ class WarPlayerTest {
         assertEquals(13, player.getHandSum());
     }
     @Test
-    public void getNameTest(){
-        WarPlayer player = new WarPlayer();
-        String expected = "Player";
-        assertEquals(player.getname(), expected);
-    }
-    @Test
     public void getHandTest(){
         WarPlayer player = new WarPlayer();
         Deck deck = new Deck();
