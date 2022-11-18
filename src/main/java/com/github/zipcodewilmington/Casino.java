@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class Casino implements Runnable {
     CasinoAccount casinoAccount;
-    private final IOConsole console = new IOConsole(AnsiColor.BLUE);
+    private final IOConsole console = new IOConsole(AnsiColor.CYAN);
 
     @Override
     public void run() {
@@ -24,7 +24,7 @@ public class Casino implements Runnable {
         CasinoAccountManager casinoAccountManager = new CasinoAccountManager();
         do {
             arcadeDashBoardInput = getArcadeDashboardInput();
-            if ("select game".equals(arcadeDashBoardInput)) {
+            if ("2".equals(arcadeDashBoardInput)|| "select game".equalsIgnoreCase(arcadeDashBoardInput)) {
                 String accountName = console.getStringInput("Enter your account name:");
                 String accountPassword = console.getStringInput("Enter your account password:");
                 this.casinoAccount = casinoAccountManager.getAccount(accountName, accountPassword);
@@ -53,6 +53,9 @@ public class Casino implements Runnable {
 //                        case 7:
 //                            play(new GoFishGame(), new GoFishPlayer());
 //                            break;
+                        case 8:
+                            console.println("Have a good day!");
+                            System.exit(1);
                         default:
                         // TODO - implement better exception handling
                         String errorMessage = "[ %s ] is an invalid game selection";
@@ -63,12 +66,15 @@ public class Casino implements Runnable {
                     String errorMessage = "No account found with name of [ %s ] and password of [ %s ]";
                     throw new RuntimeException(String.format(errorMessage, accountPassword, accountName));
                 }
-            } else if ("create account".equals(arcadeDashBoardInput)) {
+            } else if ("1".equals(arcadeDashBoardInput) || "create account".equalsIgnoreCase(arcadeDashBoardInput)) {
                 console.println("Welcome to the account-creation screen.");
                 String accountName = console.getStringInput("Enter your account name:");
                 String accountPassword = console.getStringInput("Enter your account password:");
                 CasinoAccount newAccount = casinoAccountManager.createAccount(accountName, accountPassword);
                 casinoAccountManager.registerAccount(newAccount);
+            } else if ("3".equals(arcadeDashBoardInput) || "exit casino".equalsIgnoreCase(arcadeDashBoardInput)) {
+                console.println("Have a good day!");
+                System.exit(1);
             }
         } while (!"logout".equals(arcadeDashBoardInput));
     }
@@ -77,7 +83,7 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the F.A.D.E. Casino!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ create account ], [ select game ]")
+                .append("\n\t[ 1: CREATE ACCOUNT ], [ 2: SELECT GAME ], [ 3: EXIT CASINO ]")
                 .toString());
     }
 
@@ -86,7 +92,7 @@ public class Casino implements Runnable {
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("Your current balance is " + casinoAccount.getAccountBalance())
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ 1: ROULETTE ], [ 2: BLACKJACK ], [ 3: RPSLS ], [ 4: SLOTS ], [ 5: WAR ], [ 6: CARD MEMORY ], [ 7: GO FISH ]")
+                .append("\n\t[ 1: ROULETTE ], [ 2: BLACKJACK ], [ 3: RPSLS ], [ 4: SLOTS ], [ 5: WAR ], [ 6: CARD MEMORY ], [ 7: GO FISH ], [ 8: EXIT CASINO ]")
                 .toString());
     }
 

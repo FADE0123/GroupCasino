@@ -10,14 +10,26 @@ import java.util.Scanner;
 
 public class RPSLSGame implements GameInterface {
     RPSLSplayer player;
+    String playAgain;
+    boolean response;
     Scanner scanner = new Scanner(System.in);
+
     public RPSLSGame() {
         add(this.player);
         run();
+        System.out.println("\n");
+        Casino casino = new Casino();
+        casino.run();
     }
+
     @Override
     public void add(PlayerInterface player) {
         this.player = new RPSLSplayer("Player");
+    }
+
+    @Override
+    public void remove(PlayerInterface player) {
+
     }
 
     @Override
@@ -31,58 +43,62 @@ public class RPSLSGame implements GameInterface {
             while (true) {
                 System.out.println("Please choose your options (rock, paper, scissors, lizard, spock)");
                 playerMove = scanner.nextLine();
-                if (playerMove.equalsIgnoreCase("rock") || playerMove.equalsIgnoreCase("paper") || playerMove.equalsIgnoreCase("spock") || playerMove.equalsIgnoreCase("lizard") || playerMove.equalsIgnoreCase("spock")) {
+                while (!playerMove.equalsIgnoreCase("rock") && !playerMove.equalsIgnoreCase("paper") && !playerMove.equalsIgnoreCase("scissors") && !playerMove.equalsIgnoreCase("lizard") && !playerMove.equalsIgnoreCase("spock")) {
+                    System.out.println(playerMove + " error.");
+                    playerMove = scanner.nextLine();
+                    if (playerMove.equalsIgnoreCase("rock") || playerMove.equalsIgnoreCase("paper") || playerMove.equalsIgnoreCase("scissors") || playerMove.equalsIgnoreCase("lizard") || playerMove.equalsIgnoreCase("spock")) {
+                        break;
+                    }
+                }
+
+                System.out.println("Computer played: " + computerMove);
+
+                if (playerMove.equalsIgnoreCase(computerMove)) {
+                    System.out.println("It's a tie!");
+                } else if (playerMove.equalsIgnoreCase("rock") &&
+                        computerMove.equalsIgnoreCase("paper")) {
+                    System.out.println("You lose!");
+                } else if (playerMove.equalsIgnoreCase("paper") &&
+                        computerMove.equalsIgnoreCase("scissors")) {
+                    System.out.println("You lose!");
+                } else if (playerMove.equalsIgnoreCase("scissors") &&
+                        computerMove.equalsIgnoreCase("spock")) {
+                    System.out.println("You lose!");
+                } else if (playerMove.equalsIgnoreCase("spock") &&
+                        computerMove.equalsIgnoreCase("lizard")) {
+                    System.out.println("You lose!");
+                } else if (playerMove.equalsIgnoreCase("lizard") &&
+                        computerMove.equalsIgnoreCase("scissors")) {
+                    System.out.println("You lose!");
+                } else if (playerMove.equalsIgnoreCase("scissors") &&
+                        computerMove.equalsIgnoreCase("rock")) {
+                    System.out.println("You lose!");
+                } else if (playerMove.equalsIgnoreCase("rock") &&
+                        computerMove.equalsIgnoreCase("spock")) {
+                    System.out.println("You lose!");
+                } else if (playerMove.equalsIgnoreCase("spock") &&
+                        computerMove.equalsIgnoreCase("paper")) {
+                    System.out.println("You lose!");
+                } else if (playerMove.equalsIgnoreCase("paper") &&
+                        computerMove.equalsIgnoreCase("lizard")) {
+                    System.out.println("You lose!");
+                } else if (playerMove.equalsIgnoreCase("lizard") &&
+                        computerMove.equalsIgnoreCase("rock")) {
+                    System.out.println("You lose!");
+                } else {
+                    System.out.println("You win!");
+                }
+                System.out.println("Play again? (y/n)");
+                playAgain = scanner.nextLine();
+                if (!playAgain.equalsIgnoreCase("y")) {
                     break;
                 }
-                System.out.println(playerMove + " error.");
             }
-
-            System.out.println("Computer played: " + computerMove);
-
-            if (playerMove.equalsIgnoreCase(computerMove)) {
-                System.out.println("It's a tie!");
-            } else if (playerMove.equalsIgnoreCase("rock")) {
-                if (computerMove.equalsIgnoreCase("paper")) {
-                    System.out.println("You lose!");
-
-                } else if (computerMove.equalsIgnoreCase("scissors")) {
-                    System.out.println("You win!");
-                }
-            } else if (playerMove.equalsIgnoreCase("lizard")) {
-                if (computerMove.equalsIgnoreCase("spock")) {
-                    System.out.println("You win!");
-
-                } else if (computerMove.equalsIgnoreCase("scissors")) {
-                    System.out.println("You lose!");
-                }
-            } else if (playerMove.equalsIgnoreCase("lizard")) {
-                if (computerMove.equalsIgnoreCase("paper")) {
-                    System.out.println("You win!");
-
-                } else if (computerMove.equalsIgnoreCase("rock")) {
-                    System.out.println("You lose!");
-                }
-            }
-
-            System.out.println("Play again? (y/n)");
-            String playAgain = scanner.nextLine();
-
             if (!playAgain.equalsIgnoreCase("y")) {
                 break;
             }
+
         }
-        scanner.close();
-        System.out.println("\n");
-        Casino casino = new Casino();
-        casino.run();
     }
-
-
-
-    @Override
-    public void remove(PlayerInterface player) {
-
-    }
-
 }
 //}

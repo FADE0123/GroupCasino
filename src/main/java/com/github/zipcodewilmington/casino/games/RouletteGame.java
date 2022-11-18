@@ -1,7 +1,10 @@
 package com.github.zipcodewilmington.casino.games;
 import com.github.zipcodewilmington.Casino;
+import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.players.Player;
 import com.github.zipcodewilmington.casino.players.RoulettePlayer;
 
 import java.util.Random;
@@ -10,7 +13,7 @@ public class RouletteGame implements GameInterface {
 
         Scanner keyboard = new Scanner(System.in);
 
-        int total = 500;
+        int total = 10;
         int amount;
         int choice, win = 0, lose = 0, spin = 0;
         int number;
@@ -18,15 +21,12 @@ public class RouletteGame implements GameInterface {
         int result;
         char response = 'y';
         int resultArr[] = new int[37];
-        RoulettePlayer player;
 
     public RouletteGame() {
-        add(this.player);
         run();
     }
     @Override
     public void add(PlayerInterface player) {
-        this.player = new RoulettePlayer("Player");
     }
     @Override
     public void run() {
@@ -96,6 +96,7 @@ public class RouletteGame implements GameInterface {
         Casino casino = new Casino();
         casino.run();
         }
+
 
 
 
