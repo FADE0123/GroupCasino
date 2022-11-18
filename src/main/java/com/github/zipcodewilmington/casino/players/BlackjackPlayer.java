@@ -10,6 +10,9 @@ public class BlackjackPlayer {
         this.name = name;
         this.emptyHand();
     }
+    public BlackjackPlayer() {
+
+    }
     public void emptyHand() {
         for (int i = 0; i < 5; i++) {
             this.hand[i] = null;
