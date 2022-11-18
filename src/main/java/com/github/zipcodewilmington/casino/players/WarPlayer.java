@@ -2,6 +2,8 @@ package com.github.zipcodewilmington.casino.players;
 
 import com.github.zipcodewilmington.Cards;
 
+import com.github.zipcodewilmington.casino.PlayerInterface;
+
 public class WarPlayer {
     private String name;
     private Cards[] hand = new Cards[5];
