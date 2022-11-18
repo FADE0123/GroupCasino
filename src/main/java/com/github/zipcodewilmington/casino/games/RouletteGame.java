@@ -1,8 +1,12 @@
 package com.github.zipcodewilmington.casino.games;
-import com.github.zipcodewilmington.casino.games.RandomNumberGenerator;
+import com.github.zipcodewilmington.Casino;
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.players.RoulettePlayer;
+
 import java.util.Random;
 import java.util.Scanner;
-public class RouletteGame {
+public class RouletteGame implements GameInterface {
 
         Scanner keyboard = new Scanner(System.in);
 
@@ -14,8 +18,18 @@ public class RouletteGame {
         int result;
         char response = 'y';
         int resultArr[] = new int[37];
+        RoulettePlayer player;
 
     public RouletteGame() {
+        add(this.player);
+        run();
+    }
+    @Override
+    public void add(PlayerInterface player) {
+        this.player = new RoulettePlayer("Player");
+    }
+    @Override
+    public void run() {
             while (response == 'y' || response == 'Y' && total <= 0) {
                 System.out.println("Enter bet amount: ");
                 amount = keyboard.nextInt();
@@ -78,7 +92,17 @@ public class RouletteGame {
                 response = keyboard.next().charAt(0);
 
             }
+        System.out.println("\n");
+        Casino casino = new Casino();
+        casino.run();
         }
+
+
+
+    @Override
+    public void remove(PlayerInterface player) {
+
     }
+}
 
 

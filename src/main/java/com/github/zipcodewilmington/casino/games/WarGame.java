@@ -1,19 +1,31 @@
 package com.github.zipcodewilmington.casino.games;
 
 import com.github.zipcodewilmington.Deck;
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.players.WarPlayer;
 
 import java.util.Scanner;
 
-public class WarGame {
+public class WarGame implements GameInterface {
     int total = 500;
     Scanner scanner = new Scanner(System.in);
     int bet;
     char response = 'y';
     Deck deck = new Deck();
-    WarPlayer player = new WarPlayer();
+    WarPlayer player;
     WarPlayer dealer = new WarPlayer();
     public WarGame() {
+        add(this.player);
+        run();
+    }
+    @Override
+    public void add(PlayerInterface player) {
+        this.player = new WarPlayer("Player");
+    }
+
+    @Override
+    public void run() {
         while (response == 'y' || response == 'Y' && total <= 0) {
             player.emptyHand();
             dealer.emptyHand();
@@ -37,4 +49,12 @@ public class WarGame {
             }
         }
     }
+
+
+
+    @Override
+    public void remove(PlayerInterface player) {
+
+    }
+
 }
