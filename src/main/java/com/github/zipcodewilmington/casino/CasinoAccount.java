@@ -9,7 +9,7 @@ public class CasinoAccount {
 
     private String accountName;
     private String accountPassword;
-    public double accountBalance = 1000.00;
+    public int accountBalance = 1000;
 
     public CasinoAccount (String accountName, String accountPassword){
         this.accountName = accountName;
@@ -30,13 +30,13 @@ public class CasinoAccount {
     public String getAccountPassword() {
         return accountPassword;
     }
-    public double getAccountBalance() {
+    public int getAccountBalance() {
         return accountBalance;
     }
     public void addAccountBalance(double amount) {
         accountBalance += amount;
     }
-    public void subtractAccountBalance(double amount) {
+    public void subtractAccountBalance(int amount) {
         accountBalance -= amount;
     }
     public boolean checkAccountBalance(double amount) {

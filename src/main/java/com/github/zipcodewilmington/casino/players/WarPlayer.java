@@ -1,16 +1,21 @@
 package com.github.zipcodewilmington.casino.players;
 
 import com.github.zipcodewilmington.Cards;
-
+import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.games.WarGame;
 
-public class WarPlayer {
+public class WarPlayer implements PlayerInterface{
     private String name;
     private Cards[] hand = new Cards[5];
     private int numberCards;
 
+    public WarPlayer(String name) {
+        this.name = name;
+        this.emptyHand();
+    }
     public WarPlayer() {
-        this.name = "Player";
+        getArcadeAccount();
     }
     public void emptyHand() {
         for (int i = 0; i < 5; i++) {
@@ -74,5 +79,17 @@ public class WarPlayer {
     }
     public Cards getHand(int index) {
         return hand[index];
+    }
+
+    @Override
+    public CasinoAccount getArcadeAccount() {
+        CasinoAccount name = new CasinoAccount();
+        name.getAccountName();
+        return name;
+    }
+
+    @Override
+    public <SomeReturnType> SomeReturnType play() {
+        return play();
     }
 }

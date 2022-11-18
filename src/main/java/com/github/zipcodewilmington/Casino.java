@@ -15,6 +15,7 @@ import java.util.Scanner;
  * Created by leon on 7/21/2020.
  */
 public class Casino implements Runnable {
+    CasinoAccount casinoAccount;
     private final IOConsole console = new IOConsole(AnsiColor.BLUE);
 
     @Override
@@ -26,23 +27,16 @@ public class Casino implements Runnable {
             if ("select game".equals(arcadeDashBoardInput)) {
                 String accountName = console.getStringInput("Enter your account name:");
                 String accountPassword = console.getStringInput("Enter your account password:");
-                CasinoAccount casinoAccount = casinoAccountManager.getAccount(accountName, accountPassword);
-                boolean isValidLogin = casinoAccount != null;
+                this.casinoAccount = casinoAccountManager.getAccount(accountName, accountPassword);
+                boolean isValidLogin = this.casinoAccount != null;
                 if (isValidLogin) {
-//                    String gameSelectionInput = getGameSelectionInput().toUpperCase();
-                    Scanner scanner = new Scanner(System.in);
-                    System.out.println("Please select a game");
-                    System.out.println("[1 = Roulette] [2 = Blackjack] [3 = Card Memory] " +
-                            "[4 = Go Fish] [5 = RPSLS] [6 = Slots] [7 = War]");
-
-                    int userInput = scanner.nextInt();
-
-                    switch(userInput){
+                    int gameSelectionInput = Integer.parseInt(getGameSelectionInput());
+                    switch(gameSelectionInput){
                         case 1:
                             play(new RouletteGame(), new RoulettePlayer());
                             break;
                         case 2:
-                            play(new BlackjackGame(), new BlackjackPlayer("Freddy"));
+                            play(new BlackjackGame(), new BlackjackPlayer());
                             break;
                         case 3:
                             play(new CardMemoryGame(), new CardMemoryPlayer());
@@ -60,11 +54,9 @@ public class Casino implements Runnable {
                             play(new WarGame(), new WarPlayer());
                             break;
                         default:
-                            System.out.println("Please Select a game");
-                            break;
                         // TODO - implement better exception handling
-                        //String errorMessage = "[ %s ] is an invalid game selection";
-                        //throw new RuntimeException(String.format(errorMessage, gameSelectionInput));
+                        String errorMessage = "[ %s ] is an invalid game selection";
+                        throw new RuntimeException(String.format(errorMessage, gameSelectionInput));
                     }
                 } else {
                     // TODO - implement better exception handling
@@ -83,19 +75,20 @@ public class Casino implements Runnable {
 
     private String getArcadeDashboardInput() {
         return console.getStringInput(new StringBuilder()
-                .append("Welcome to the Arcade Dashboard!")
+                .append("Welcome to the F.A.D.E. Casino!")
                 .append("\nFrom here, you can select any of the following options:")
                 .append("\n\t[ create account ], [ select game ]")
                 .toString());
     }
 
-//    private String getGameSelectionInput() {
-//        return console.getStringInput(new StringBuilder()
-//                .append("Welcome to the Game Selection Dashboard!")
-//                .append("\nFrom here, you can select any of the following options:")
-//                .append("\n\t[ SLOTS ], [ GOFISH ], [ BLACKJACK ], [ CARD MEMORY ], [ WAR ], [ ROULETTE ], [ RPSLS ]")
-//                .toString());
-//    }
+    private String getGameSelectionInput() {
+        return console.getStringInput(new StringBuilder()
+                .append("Welcome to the Game Selection Dashboard!")
+                .append("Your current balance is " + casinoAccount.getAccountBalance())
+                .append("\nFrom here, you can select any of the following options:")
+                .append("\n\t[ 1: ROULETTE ], [ 2: BLACKJACK ], [ 3: CARD MEMORY ], [ 4: GO FISH ], [ 5: RPSLS ], [ 6: SLOTS ], [ 7: WAR ]")
+                .toString());
+    }
 
     private void play(Object gameObject, Object playerObject) {
         GameInterface game = (GameInterface)gameObject;

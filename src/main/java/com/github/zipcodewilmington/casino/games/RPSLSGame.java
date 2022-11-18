@@ -1,12 +1,28 @@
 package com.github.zipcodewilmington.casino.games;
 
+import com.github.zipcodewilmington.Casino;
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.players.RPSLSplayer;
+import com.github.zipcodewilmington.casino.players.WarPlayer;
+
 import java.util.Random;
 import java.util.Scanner;
 
-public class RPSLSGame {
+public class RPSLSGame implements GameInterface {
+    RPSLSplayer player;
+    Scanner scanner = new Scanner(System.in);
     public RPSLSGame() {
-        Scanner scanner = new Scanner(System.in);
+        add(this.player);
+        run();
+    }
+    @Override
+    public void add(PlayerInterface player) {
+        this.player = new RPSLSplayer("Player");
+    }
 
+    @Override
+    public void run() {
         while (true) {
             String[] rpsls = {"rock", "paper", "scissors", "lizard", "spock"};
             String computerMove = rpsls[new Random().nextInt(rpsls.length)];
@@ -57,6 +73,17 @@ public class RPSLSGame {
             }
         }
         scanner.close();
+        System.out.println("\n");
+        Casino casino = new Casino();
+        casino.run();
     }
+
+
+
+    @Override
+    public void remove(PlayerInterface player) {
+
+    }
+
 }
 //}
