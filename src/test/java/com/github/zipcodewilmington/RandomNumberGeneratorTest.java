@@ -7,7 +7,10 @@ import org.junit.Test;
 public class RandomNumberGeneratorTest {
 
     @Test
+
     public void randomizedNumberTest() {
+
+
         //Given
         int upperBound = 9;
 
@@ -15,6 +18,7 @@ public class RandomNumberGeneratorTest {
         int result = RandomNumberGenerator.randomizedNumber(upperBound);
         //Then
         Assert.assertTrue((result >= 0) && (result <= 8));
+
     }
 
     @Test
@@ -24,6 +28,7 @@ public class RandomNumberGeneratorTest {
 
         //When
         int result = RandomNumberGenerator.randomizedNumber(upperBound);
+
         //Then
         Assert.assertTrue((result >= 0) && (result <= 37));
     }
