@@ -8,7 +8,7 @@ import com.github.zipcodewilmington.casino.players.WarPlayer;
 import java.util.Scanner;
 
 public class WarGame implements GameInterface {
-    int total = 500;
+    int total;
     Scanner scanner = new Scanner(System.in);
     int bet;
     char response = 'y';

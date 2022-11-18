@@ -1,5 +1,7 @@
 package com.github.zipcodewilmington.casino;
 
+import com.github.zipcodewilmington.Casino;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class CasinoAccountManager {
 
         for (CasinoAccount casinoAccount : casinoAccountList) {
             if(accountName.equals(casinoAccount.getAccountName())
-                && accountPassword.equals(casinoAccount.getAccountPassword())){
+                    && accountPassword.equals(casinoAccount.getAccountPassword())){
                 return casinoAccount;
             }
             else {
