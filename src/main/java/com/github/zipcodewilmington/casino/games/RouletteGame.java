@@ -1,11 +1,7 @@
 package com.github.zipcodewilmington.casino.games;
 import com.github.zipcodewilmington.Casino;
-import com.github.zipcodewilmington.casino.CasinoAccount;
-import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
-import com.github.zipcodewilmington.casino.players.Player;
-import com.github.zipcodewilmington.casino.players.RoulettePlayer;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -19,7 +15,7 @@ public class RouletteGame implements GameInterface {
         int number;
         int rouletteNum;
         int result;
-        char response = 'y';
+        char response;
         int resultArr[] = new int[37];
 
     public RouletteGame() {
@@ -30,7 +26,6 @@ public class RouletteGame implements GameInterface {
     }
     @Override
     public void run() {
-            while (response == 'y' || response == 'Y' && total <= 0) {
                 System.out.println("Enter bet amount: ");
                 amount = keyboard.nextInt();
                 System.out.println("0 - Even\n1 - Odd\n2 - Number\n");
@@ -75,9 +70,9 @@ public class RouletteGame implements GameInterface {
                     total = total - (result + 1) * (amount);
                     lose++;
                     resultArr[rouletteNum]++;
-                    if (total <= 0) {
-                        break;
-                    }
+//                    if (total <= 0) {
+//                        break;
+//                    }
                 }
                 for (int totals = 1; totals < 36; totals++) {
                     if (resultArr[totals] > 0) {
@@ -88,10 +83,6 @@ public class RouletteGame implements GameInterface {
                 System.out.println("You have won " + win + " games.");
                 System.out.println("you have lost " + lose + " games.");
                 System.out.println("The wheel has been spun " + spin + " times.");
-                System.out.println("\nWould you like to play another game? (y/n)");
-                response = keyboard.next().charAt(0);
-
-            }
         System.out.println("\n");
         Casino casino = new Casino();
         casino.run();

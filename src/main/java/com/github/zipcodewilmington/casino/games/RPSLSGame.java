@@ -41,7 +41,8 @@ public class RPSLSGame implements GameInterface {
             String playerMove;
 
             while (true) {
-                System.out.println("Please choose your options (rock, paper, scissors, lizard, spock)");
+                System.out.println("Please choose your options:\n" +
+                        "[ROCK] [PAPER] [SCISSORS] [LIZARD] [SPOCK]");
                 playerMove = scanner.nextLine();
                 while (!playerMove.equalsIgnoreCase("rock") && !playerMove.equalsIgnoreCase("paper") && !playerMove.equalsIgnoreCase("scissors") && !playerMove.equalsIgnoreCase("lizard") && !playerMove.equalsIgnoreCase("spock")) {
                     System.out.println(playerMove + " error.");
