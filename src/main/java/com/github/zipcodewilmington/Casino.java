@@ -4,8 +4,8 @@ import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
-import com.github.zipcodewilmington.casino.players.RoulettePlayer;
-import com.github.zipcodewilmington.casino.players.SlotsPlayer;
+import com.github.zipcodewilmington.casino.games.*;
+import com.github.zipcodewilmington.casino.players.*;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
@@ -23,44 +23,41 @@ public class Casino implements Runnable {
         CasinoAccountManager casinoAccountManager = new CasinoAccountManager();
         do {
             arcadeDashBoardInput = getArcadeDashboardInput();
-            if ("select-game".equals(arcadeDashBoardInput)) {
+            if ("select game".equals(arcadeDashBoardInput)) {
                 String accountName = console.getStringInput("Enter your account name:");
                 String accountPassword = console.getStringInput("Enter your account password:");
                 CasinoAccount casinoAccount = casinoAccountManager.getAccount(accountName, accountPassword);
                 boolean isValidLogin = casinoAccount != null;
                 if (isValidLogin) {
-                    String gameSelectionInput = getGameSelectionInput().toUpperCase();
+//                    String gameSelectionInput = getGameSelectionInput().toUpperCase();
                     Scanner scanner = new Scanner(System.in);
                     System.out.println("Please select a game");
-                    System.out.println("[1 = Poker] [2 = Roulette] [3 = Blackjack] [4 = War] " +
-                            "[5 = Slots] [6 = GoFish] [7 = CardMemory] [8 = RPSLS]");
+                    System.out.println("[1 = Roulette] [2 = Blackjack] [3 = Card Memory] " +
+                            "[4 = Go Fish] [5 = RPSLS] [6 = Slots] [7 = War]");
 
                     int userInput = scanner.nextInt();
 
                     switch(userInput){
                         case 1:
-                            System.out.println("You chose Poker");
+                            play(new RouletteGame(), new RoulettePlayer());
                             break;
                         case 2:
-                            System.out.println("You chose Roulette");
+                            play(new BlackjackGame(), new BlackjackPlayer("Freddy"));
                             break;
                         case 3:
-                            System.out.println("You chose Blackjack");
+                            play(new CardMemoryGame(), new CardMemoryPlayer());
                             break;
                         case 4:
-                            System.out.println("You chose War");
+                            play(new GoFishGame(), new GoFishPlayer());
                             break;
                         case 5:
-                            System.out.println("You chose Slots");
+                            play(new RPSLSGame(), new RPSLSplayer());
                             break;
                         case 6:
-                            System.out.println("You chose GoFish");
+                            play(new SlotsGame(), new SlotsPlayer());
                             break;
                         case 7:
-                            System.out.println("You chose CardMemory");
-                            break;
-                        case 8:
-                            System.out.println("You chose RPSLS");
+                            play(new WarGame(), new WarPlayer());
                             break;
                         default:
                             System.out.println("Please Select a game");
@@ -74,7 +71,7 @@ public class Casino implements Runnable {
                     String errorMessage = "No account found with name of [ %s ] and password of [ %s ]";
                     throw new RuntimeException(String.format(errorMessage, accountPassword, accountName));
                 }
-            } else if ("create-account".equals(arcadeDashBoardInput)) {
+            } else if ("create account".equals(arcadeDashBoardInput)) {
                 console.println("Welcome to the account-creation screen.");
                 String accountName = console.getStringInput("Enter your account name:");
                 String accountPassword = console.getStringInput("Enter your account password:");
@@ -88,17 +85,17 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Arcade Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ create-account ], [ select-game ]")
+                .append("\n\t[ create account ], [ select game ]")
                 .toString());
     }
 
-    private String getGameSelectionInput() {
-        return console.getStringInput(new StringBuilder()
-                .append("Welcome to the Game Selection Dashboard!")
-                .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ NUMBERGUESS ]")
-                .toString());
-    }
+//    private String getGameSelectionInput() {
+//        return console.getStringInput(new StringBuilder()
+//                .append("Welcome to the Game Selection Dashboard!")
+//                .append("\nFrom here, you can select any of the following options:")
+//                .append("\n\t[ SLOTS ], [ GOFISH ], [ BLACKJACK ], [ CARD MEMORY ], [ WAR ], [ ROULETTE ], [ RPSLS ]")
+//                .toString());
+//    }
 
     private void play(Object gameObject, Object playerObject) {
         GameInterface game = (GameInterface)gameObject;
