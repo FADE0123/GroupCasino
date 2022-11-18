@@ -4,7 +4,6 @@ import com.github.zipcodewilmington.Casino;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.players.RPSLSplayer;
-import com.github.zipcodewilmington.casino.players.WarPlayer;
 
 import java.util.Random;
 import java.util.Scanner;
