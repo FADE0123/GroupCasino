@@ -39,20 +39,20 @@ public class Casino implements Runnable {
                             play(new BlackjackGame(), new BlackjackPlayer());
                             break;
                         case 3:
-                            play(new CardMemoryGame(), new CardMemoryPlayer());
-                            break;
-                        case 4:
-                            play(new GoFishGame(), new GoFishPlayer());
-                            break;
-                        case 5:
                             play(new RPSLSGame(), new RPSLSplayer());
                             break;
-                        case 6:
+                        case 4:
                             play(new SlotsGame(), new SlotsPlayer());
                             break;
-                        case 7:
+                        case 5:
                             play(new WarGame(), new WarPlayer());
                             break;
+//                        case 6:
+//                            play(new CardMemoryGame(), new CardMemoryPlayer());
+//                            break;
+//                        case 7:
+//                            play(new GoFishGame(), new GoFishPlayer());
+//                            break;
                         default:
                         // TODO - implement better exception handling
                         String errorMessage = "[ %s ] is an invalid game selection";
@@ -86,7 +86,7 @@ public class Casino implements Runnable {
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("Your current balance is " + casinoAccount.getAccountBalance())
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ 1: ROULETTE ], [ 2: BLACKJACK ], [ 3: CARD MEMORY ], [ 4: GO FISH ], [ 5: RPSLS ], [ 6: SLOTS ], [ 7: WAR ]")
+                .append("\n\t[ 1: ROULETTE ], [ 2: BLACKJACK ], [ 3: RPSLS ], [ 4: SLOTS ], [ 5: WAR ], [ 6: CARD MEMORY ], [ 7: GO FISH ]")
                 .toString());
     }
 
