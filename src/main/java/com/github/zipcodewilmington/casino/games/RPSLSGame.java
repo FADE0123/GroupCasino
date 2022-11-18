@@ -1,56 +1,62 @@
 package com.github.zipcodewilmington.casino.games;
 
-import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 public class RPSLSGame {
-    static final String ROCK = "rock";
-    static final String PAPER = "paper";
-    static final String SCISSORS = "scissors";
-    static final String LIZARD = "lizard";
-    static final String SPORK = "spork";
+    public RPSLSGame() {
+        Scanner scanner = new Scanner(System.in);
 
-    public String getWinningMove(String handSign) {
-        if (handSign.equals (ROCK)) {
-            return handSign;
-        }
-        else if (handSign.equals(PAPER)) {
-            return handSign;
-        }
-        else if (handSign.equals(SCISSORS)) {
-            return handSign;
-        }
-        else if (handSign.equals(LIZARD)) {
-            return handSign;
-        }
-        else if (handSign.equals(SPORK)) {
-            return handSign;
-        }
-        return handSign;
-    }
+        while (true) {
+            String[] rpsls = {"rock", "paper", "scissors", "lizard", "spock"};
+            String computerMove = rpsls[new Random().nextInt(rpsls.length)];
 
-    public String getLosingMove(String handSign) {
-        if (handSign.equals (ROCK)) {
-            return handSign;
-        }
-        else if (handSign.equals(PAPER)) {
-            return handSign;
-        }
-        else if (handSign.equals(SCISSORS)) {
-            return handSign;
-        }
-        else if (handSign.equals(LIZARD)) {
-            return handSign;
-        }
-        else if (handSign.equals(SPORK)) {
-            return handSign;
-        }
-        return handSign;
-    }
+            String playerMove;
 
-    public String getWinner(String RPSLSplayer, String RPSLSplayer2) {
-        if (RPSLSplayer.equals(RPSLSplayer2)) {
-            return null;
+            while (true) {
+                System.out.println("Please choose your options (rock, paper, scissors, lizard, spock)");
+                playerMove = scanner.nextLine();
+                if (playerMove.equalsIgnoreCase("rock") || playerMove.equalsIgnoreCase("paper") || playerMove.equalsIgnoreCase("spock") || playerMove.equalsIgnoreCase("lizard") || playerMove.equalsIgnoreCase("spock")) {
+                    break;
+                }
+                System.out.println(playerMove + " error.");
+            }
+
+            System.out.println("Computer played: " + computerMove);
+
+            if (playerMove.equalsIgnoreCase(computerMove)) {
+                System.out.println("It's a tie!");
+            } else if (playerMove.equalsIgnoreCase("rock")) {
+                if (computerMove.equalsIgnoreCase("paper")) {
+                    System.out.println("You lose!");
+
+                } else if (computerMove.equalsIgnoreCase("scissors")) {
+                    System.out.println("You win!");
+                }
+            } else if (playerMove.equalsIgnoreCase("lizard")) {
+                if (computerMove.equalsIgnoreCase("spock")) {
+                    System.out.println("You win!");
+
+                } else if (computerMove.equalsIgnoreCase("scissors")) {
+                    System.out.println("You lose!");
+                }
+            } else if (playerMove.equalsIgnoreCase("lizard")) {
+                if (computerMove.equalsIgnoreCase("paper")) {
+                    System.out.println("You win!");
+
+                } else if (computerMove.equalsIgnoreCase("rock")) {
+                    System.out.println("You lose!");
+                }
+            }
+
+            System.out.println("Play again? (y/n)");
+            String playAgain = scanner.nextLine();
+
+            if (!playAgain.equalsIgnoreCase("y")) {
+                break;
+            }
         }
-        return getWinningMove(RPSLSplayer).equals(getLosingMove(RPSLSplayer2)) ? RPSLSplayer : RPSLSplayer2;
+        scanner.close();
     }
 }
+//}

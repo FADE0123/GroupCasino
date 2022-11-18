@@ -6,6 +6,10 @@ public class BlackjackPlayer {
     private String name;
     private Cards[] hand = new Cards[5];
     private int numberCards;
+
+//    public BlackjackPlayer () {
+//
+//    }
     public BlackjackPlayer(String name) {
         this.name = name;
         this.emptyHand();
