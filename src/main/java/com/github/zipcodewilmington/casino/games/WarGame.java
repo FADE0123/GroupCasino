@@ -11,7 +11,6 @@ public class WarGame {
     int bet;
     char response = 'y';
     Deck deck = new Deck();
-
     WarPlayer player = new WarPlayer();
     WarPlayer dealer = new WarPlayer();
     public WarGame() {
