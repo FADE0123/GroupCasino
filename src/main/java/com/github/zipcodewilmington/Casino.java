@@ -9,8 +9,6 @@ import com.github.zipcodewilmington.casino.players.*;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
-import java.util.Scanner;
-
 /**
  * Created by leon on 7/21/2020.
  */
@@ -39,7 +37,7 @@ public class Casino implements Runnable {
                             play(new BlackjackGame(), new BlackjackPlayer());
                             break;
                         case 3:
-                            play(new RPSLSGame(), new RPSLSplayer());
+                            play(new RPSGame(), new RPSplayer());
                             break;
                         case 4:
                             play(new SlotsGame(), new SlotsPlayer());
@@ -86,7 +84,7 @@ public class Casino implements Runnable {
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("Your current balance is " + casinoAccount.getAccountBalance())
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ 1: ROULETTE ], [ 2: BLACKJACK ], [ 3: RPSLS ], [ 4: SLOTS ], [ 5: WAR ], [ 6: CARD MEMORY ], [ 7: GO FISH ]")
+                .append("\n\t[ 1: ROULETTE ], [ 2: BLACKJACK ], [ 3: RPSLS ], [ 4: SLOTS ], [ 5: WAR ]")
                 .toString());
     }
 

@@ -1,5 +1,8 @@
-package com.github.zipcodewilmington;
+package com.github.zipcodewilmington.casino.players;
 
+import com.github.zipcodewilmington.Cards;
+import com.github.zipcodewilmington.Deck;
+import com.github.zipcodewilmington.Suits;
 import com.github.zipcodewilmington.casino.players.BlackjackPlayer;
 import org.junit.jupiter.api.Test;
 

@@ -3,15 +3,15 @@ package com.github.zipcodewilmington.casino.players;
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
-public class RPSLSplayer implements PlayerInterface {
+public class RPSplayer implements PlayerInterface {
 
     String name;
 
-    public RPSLSplayer(String name) {
+    public RPSplayer(String name) {
         this.name = name;
     }
 
-    public RPSLSplayer() {
+    public RPSplayer() {
         getArcadeAccount();
     }
 
