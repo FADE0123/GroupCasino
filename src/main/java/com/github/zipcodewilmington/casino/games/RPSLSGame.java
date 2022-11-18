@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class RPSLSGame implements GameInterface {
     RPSLSplayer player;
     String playAgain;
-    boolean response;
     Scanner scanner = new Scanner(System.in);
 
     public RPSLSGame() {
@@ -35,8 +34,8 @@ public class RPSLSGame implements GameInterface {
     @Override
     public void run() {
         while (true) {
-            String[] rpsls = {"rock", "paper", "scissors", "lizard", "spock"};
-            String computerMove = rpsls[new Random().nextInt(rpsls.length)];
+            String[] rpsls = {"rock", "paper", "scissors", "lizard", "spock", ";ja;dkja;wej;ak"};
+
 
             String playerMove;
 
@@ -51,9 +50,8 @@ public class RPSLSGame implements GameInterface {
                         break;
                     }
                 }
-
+                String computerMove = rpsls[new Random().nextInt(rpsls.length)];
                 System.out.println("Computer played: " + computerMove);
-
                 if (playerMove.equalsIgnoreCase(computerMove)) {
                     System.out.println("It's a tie!");
                 } else if (playerMove.equalsIgnoreCase("rock") &&
@@ -86,6 +84,8 @@ public class RPSLSGame implements GameInterface {
                 } else if (playerMove.equalsIgnoreCase("lizard") &&
                         computerMove.equalsIgnoreCase("rock")) {
                     System.out.println("You lose!");
+                } else if (computerMove.equalsIgnoreCase(";ja;dkja;wej;ak")) {
+                    System.out.println("You win, the computer is an idiot");
                 } else {
                     System.out.println("You win!");
                 }
@@ -98,7 +98,6 @@ public class RPSLSGame implements GameInterface {
             if (!playAgain.equalsIgnoreCase("y")) {
                 break;
             }
-
         }
     }
 }

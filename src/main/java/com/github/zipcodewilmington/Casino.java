@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class Casino implements Runnable {
     CasinoAccount casinoAccount;
-    private final IOConsole console = new IOConsole(AnsiColor.CYAN);
+    private final IOConsole console = new IOConsole(AnsiColor.GREEN);
 
     @Override
     public void run() {
