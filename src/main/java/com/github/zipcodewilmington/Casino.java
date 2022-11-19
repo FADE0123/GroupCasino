@@ -66,9 +66,9 @@ public class Casino implements Runnable {
                                     exit.println("TIME TO GO!");
                                     System.exit(1);
                                 }
-//                        case 6:
-//                            play(new CardMemoryGame(), new CardMemoryPlayer());
-//                            break;
+                        case 6:
+                            play(new HighLowGame(), new HighLowPlayer());
+                            break;
 //                        case 7:
 //                            play(new GoFishGame(), new GoFishPlayer());
 //                            break;
@@ -130,7 +130,7 @@ public class Casino implements Runnable {
                 .append("Your current balance is " + casinoAccount.getAccountBalance())
                 .append("\nFrom here, you can select any of the following options:")
                 .append("\n    BETTING GAME [ 1:  WAR  ], [ 2:  BLACKJACK  ], [ 3:  SLOTS  ], [  4:  ROULETTE  ]")
-                .append("\nNON-BETTING GAME [ 5: RPSLS ], [ 6: CARD MEMORY ], [ 7: GO FISH ], [ 8: EXIT CASINO ]")
+                .append("\nNON-BETTING GAME [ 5: RPSLS ], [ 6:  HIGH  LOW  ], [ 8: EXIT CASINO ]")
                 .toString());
     }
 
