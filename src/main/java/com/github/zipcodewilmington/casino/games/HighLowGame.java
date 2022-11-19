@@ -1,8 +1,12 @@
 package com.github.zipcodewilmington.casino.games;
 
+import com.github.zipcodewilmington.Casino;
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+
 import java.util.Scanner;
 
-public class HighLowGame {
+public class HighLowGame implements GameInterface {
     public static final int LOW = 1;
     public static final int HIGH = 15;
     int generator = RandomNumberGenerator.randomizedNumber((15) + 1);
@@ -10,6 +14,18 @@ public class HighLowGame {
     int winNum;
 
     String playerMove;
+
+    public HighLowGame(){
+        run();
+        Casino casino = new Casino();
+        casino.run();
+    }
+
+    @Override
+    public void run() {
+        playerInput();
+        compareGeneratorNumToPlayerSelected();
+    }
 
     public void playerInput() {
         Scanner scanner = new Scanner(System.in);
@@ -24,10 +40,18 @@ public class HighLowGame {
     }
 
     public void compareGeneratorNumToPlayerSelected() {
+        randomGenerationNumber();
         if (playerMove.equals(LOW)) {
             ifLow();
         } else if (playerMove.equals(HIGH)) {
             ifHigh();
+        }
+        System.out.println(randomGenerationNumber());
+        if ((winNum < 1) || (winNum > 15)) {
+            System.out.println("You win!");
+        }
+        else {
+            System.out.println("You lose!");
         }
     }
 
@@ -46,4 +70,16 @@ public class HighLowGame {
         }
         return 0;
     }
+
+    @Override
+    public void add(PlayerInterface player) {
+
+    }
+
+    @Override
+    public void remove(PlayerInterface player) {
+
+    }
+
+
 }
