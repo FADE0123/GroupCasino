@@ -2,18 +2,22 @@ package com.github.zipcodewilmington.casino.players;
 
 import com.github.zipcodewilmington.Cards;
 import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.games.BlackjackGame;
 
-public class BlackjackPlayer implements PlayerInterface {
+public class BlackjackPlayer extends Player {
     private String name;
     private Cards[] hand = new Cards[5];
     private int numberCards;
+    CasinoAccount account;
 
     public BlackjackPlayer(String name) {
         this.name = name;
         this.emptyHand();
     }
     public BlackjackPlayer() {
+        account.getAccountName();
         getArcadeAccount();
     }
     public void emptyHand() {
@@ -72,13 +76,12 @@ public class BlackjackPlayer implements PlayerInterface {
 
     @Override
     public CasinoAccount getArcadeAccount() {
-        CasinoAccount name = new CasinoAccount();
-        name.getAccountName();
-        return name;
+        account = CasinoAccountManager.casinoAccountList.get(0);
+        return account;
     }
 
     @Override
-    public <SomeReturnType> SomeReturnType play() {
+    public <BlackjackGame> BlackjackGame play() {
         return play();
     }
 }

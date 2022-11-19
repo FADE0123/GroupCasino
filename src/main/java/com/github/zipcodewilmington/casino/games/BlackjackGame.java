@@ -5,10 +5,13 @@ import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.players.BlackjackPlayer;
+import com.github.zipcodewilmington.utils.AnsiColor;
+import com.github.zipcodewilmington.utils.IOConsole;
+
 import java.util.Scanner;
 
 public class BlackjackGame implements GameInterface {
-    int amount = 500;
+    int total;
     Scanner scanner = new Scanner(System.in);
     Deck BJDeck = new Deck(1, true);
     BlackjackPlayer firstPlayer;
@@ -16,6 +19,15 @@ public class BlackjackGame implements GameInterface {
     BlackjackPlayer thirdPlayer;
     BlackjackPlayer fourthPlayer;
     BlackjackPlayer dealer = new BlackjackPlayer("Dealer");
+    private final IOConsole firstConsole = new IOConsole(AnsiColor.GREEN);
+    private final IOConsole secondConsole = new IOConsole(AnsiColor.RED);
+    private final IOConsole thirdConsole = new IOConsole(AnsiColor.BLUE);
+    private final IOConsole fourthConsole = new IOConsole(AnsiColor.YELLOW);
+    private final IOConsole dealerConsole = new IOConsole(AnsiColor.WHITE);
+    String player2;
+    String player3;
+    String player4;
+    boolean draw = false;
     boolean firstPlayerDone = false;
     boolean secondPlayerDone = false;
     boolean thirdPlayerDone = false;
@@ -23,6 +35,7 @@ public class BlackjackGame implements GameInterface {
     boolean dealerDone = false;
     boolean toggle = false;
     CasinoAccount player;
+    String response;
     public BlackjackGame() {
         add(firstPlayer);
         add(secondPlayer);
@@ -46,78 +59,32 @@ public class BlackjackGame implements GameInterface {
 
     @Override
     public void run() {
-        System.out.println("Welcome to BlackJack. Please enter bet amount: ");
-        amount = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Please enter player 1. You can enter up to 4 players");
-        String player1 = scanner.nextLine();
+        total = dealerConsole.getIntegerInput("Welcome to BlackJack. Please enter bet amount: ");
         while (true) {
-            firstPlayer = new BlackjackPlayer(player1);
-            System.out.println("Please enter player 2. Leave empty for 1 player game");
-            String player2 = scanner.nextLine();
-            if (player2 == "") {
-                break;
-            } else {
-                secondPlayer = new BlackjackPlayer(player2);
-            }
-            System.out.println("Please enter player 3. Leave empty for 2 player game");
-            String player3 = scanner.nextLine();
-            if (player3 == "") {
-                break;
-            } else {
-                thirdPlayer = new BlackjackPlayer(player3);
-            }
-            System.out.println("Please enter player 4. Leave empty for 3 player game");
-            String player4 = scanner.nextLine();
-            if (player4 == "") {
-                break;
-            } else {
-                fourthPlayer = new BlackjackPlayer(player4);
-                break;
-            }
+            this.player2 = secondConsole.getStringInput("Please enter player 2. Leave empty for 1 player game");
+            secondPlayerName();
+            this.player3 = thirdConsole.getStringInput("Please enter player 3. Leave empty for 2 player game");
+            thirdPlayerName();
+            this.player4 = fourthConsole.getStringInput("Please enter player 4. Leave empty for 3 player game");
+            fourthPlayerName();
+            break;
         }
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 1; j++) {
-                firstPlayer.draw(BJDeck.dealCard());
+                firstPlayerDraw();
                 dealer.draw(BJDeck.dealCard());
-                if (secondPlayer.getname() == null) {
-                    break;
-                } else {
-                    secondPlayer.draw((BJDeck.dealCard()));
-                }
-                if (thirdPlayer.getname() == null) {
-                    break;
-                } else {
-                    thirdPlayer.draw(BJDeck.dealCard());
-                }
-                if (fourthPlayer.getname() == null) {
-                    break;
-                } else {
-                    fourthPlayer.draw(BJDeck.dealCard());
-                }
+                secondPlayerDraw();
+                thirdPlayerDraw();
+                fourthPlayerDraw();
             }
         }
-        firstPlayer.cardReveal(true);
-        System.out.print("\n");
-        secondPlayer.cardReveal(true);
-        System.out.print("\n");
-        thirdPlayer.cardReveal(true);
-        System.out.print("\n");
-        fourthPlayer.cardReveal(true);
-        System.out.print("\n");
+        handReveal();
         dealer.cardReveal(false);
         System.out.println("\nCards are dealt\n");
 
-        String response;
         while (!firstPlayerDone) {
-            System.out.println(firstPlayer.getname() + ": Hit Me [H] or Stay [S]:");
-            response = scanner.nextLine();
-            if (response.compareToIgnoreCase("H") == 0) {
-                firstPlayerDone = !firstPlayer.draw(BJDeck.dealCard());
-                firstPlayer.cardReveal(true);
-            } else if (response.compareToIgnoreCase("S") == 0) {
-                firstPlayerDone = true;
-            }
+            response = firstConsole.getStringInput(": Hit Me [H] or Stay [S]:");
+            firstPersonHitOrStay(response);
         }
         while (!secondPlayerDone) {
             if (secondPlayer.getname() == null) {
@@ -125,12 +92,7 @@ public class BlackjackGame implements GameInterface {
             } else if (!secondPlayerDone) {
                 System.out.println(secondPlayer.getname() + ": Hit Me [H] or Stay [S]:");
                 response = scanner.nextLine();
-                if (response.compareToIgnoreCase("H") == 0) {
-                    secondPlayerDone = !secondPlayer.draw(BJDeck.dealCard());
-                    secondPlayer.cardReveal(true);
-                } else if (response.compareToIgnoreCase("S") == 0) {
-                    secondPlayerDone = true;
-                }
+                secondPersonHitOrStay(response);
             }
         }
         while (!thirdPlayerDone) {
@@ -139,12 +101,7 @@ public class BlackjackGame implements GameInterface {
             } else if (!thirdPlayerDone) {
                 System.out.println(thirdPlayer.getname() + ": Hit Me [H] or Stay [S]:");
                 response = scanner.nextLine();
-                if (response.compareToIgnoreCase("H") == 0) {
-                    thirdPlayerDone = !thirdPlayer.draw(BJDeck.dealCard());
-                    thirdPlayer.cardReveal(true);
-                } else if (response.compareToIgnoreCase("S") == 0) {
-                    thirdPlayerDone = true;
-                }
+                thirdPersonHitOrStay(response);
             }
         }
         while (!fourthPlayerDone) {
@@ -153,33 +110,14 @@ public class BlackjackGame implements GameInterface {
             } else if (!fourthPlayerDone) {
                 System.out.println(fourthPlayer.getname() + ": Hit Me [H] or Stay [S]:");
                 response = scanner.nextLine();
-                if (response.compareToIgnoreCase("H") == 0) {
-                    fourthPlayerDone = !fourthPlayer.draw(BJDeck.dealCard());
-                    fourthPlayer.cardReveal(true);
-                } else if (response.compareToIgnoreCase("S") == 0) {
-                    fourthPlayerDone = true;
-                }
+                fourthPersonHitOrStay(response);
             }
         }
         while (!dealerDone) {
-            if (dealer.getHandSum() < 17) {
-                System.out.println("Dealer hits\n");
-                dealerDone = !dealer.draw(BJDeck.dealCard());
-                dealer.cardReveal(false);
-            } else {
-                System.out.println("Dealer stays\n");
-                dealerDone = true;
-            }
+            dealerHitOrStay();
         }
 
-        firstPlayer.cardReveal(true);
-        System.out.print("\n");
-        secondPlayer.cardReveal(true);
-        System.out.print("\n");
-        thirdPlayer.cardReveal(true);
-        System.out.print("\n");
-        fourthPlayer.cardReveal(true);
-        System.out.print("\n");
+        handReveal();
         dealer.cardReveal(true);
         System.out.print("\n");
 
@@ -197,7 +135,9 @@ public class BlackjackGame implements GameInterface {
             System.out.println(firstPlayer.getname() + " wins!");
             this.player = new CasinoAccount();
             player.getAccountBalance();
-            player.addAccountBalance(amount);
+            player.addAccountBalance(total);
+            player.addSecurityLevel();
+            player.kickedOutBySecurity();
         } else if (playerTwoSum > dealerSum &&
                 playerTwoSum > playerOneSum &&
                 playerTwoSum > playerThreeSum &&
@@ -206,7 +146,7 @@ public class BlackjackGame implements GameInterface {
             System.out.println(secondPlayer.getname() + " + wins!");
             this.player = new CasinoAccount();
             player.getAccountBalance();
-            player.subtractAccountBalance(amount);
+            player.subtractAccountBalance(total);
         } else if (playerThreeSum > dealerSum &&
                 playerThreeSum > playerOneSum &&
                 playerThreeSum > playerTwoSum &&
@@ -215,7 +155,7 @@ public class BlackjackGame implements GameInterface {
             System.out.println(thirdPlayer.getname() + " wins!");
             this.player = new CasinoAccount();
             player.getAccountBalance();
-            player.subtractAccountBalance(amount);
+            player.subtractAccountBalance(total);
         } else if (playerFourSum > dealerSum &&
                 playerFourSum > playerOneSum &&
                 playerFourSum > playerTwoSum &&
@@ -224,18 +164,138 @@ public class BlackjackGame implements GameInterface {
             System.out.println(fourthPlayer.getname() + " wins!");
             this.player = new CasinoAccount();
             player.getAccountBalance();
-            player.subtractAccountBalance(amount);
+            player.subtractAccountBalance(total);
         } else {
             System.out.println("Dealer wins!");
             this.player = new CasinoAccount();
             player.getAccountBalance();
-            player.subtractAccountBalance(amount);
+            player.subtractAccountBalance(total);
         }
         this.toggle = true;
 
         System.out.println("\n");
         Casino casino = new Casino();
         casino.run();
+    }
+    public boolean firstPlayerDraw() {
+        return firstPlayer.draw(BJDeck.dealCard());
+    }
+    public BlackjackPlayer secondPlayerName() {
+        while(true) {
+            if (player2 == null) {
+                break;
+            } else {
+                return secondPlayer = new BlackjackPlayer(player2);
+            }
+        }
+        return secondPlayer;
+    }
+    public BlackjackPlayer thirdPlayerName() {
+        while(true) {
+            if (player3 == null) {
+                break;
+            } else {
+                return thirdPlayer = new BlackjackPlayer(player3);
+            }
+        }
+        return thirdPlayer;
+    }
+    public BlackjackPlayer fourthPlayerName() {
+        while(true) {
+            if (player4 == null) {
+                break;
+            } else {
+                return fourthPlayer = new BlackjackPlayer(player3);
+            }
+        }
+        return fourthPlayer;
+    }
+    public boolean secondPlayerDraw() {
+        while (true) {
+            if (secondPlayer.getname() == null) {
+                break;
+            } else {
+                return secondPlayer.draw((BJDeck.dealCard()));
+            }
+        }
+        return draw;
+    }
+    public boolean thirdPlayerDraw() {
+        while (true) {
+            if (thirdPlayer.getname() == null) {
+                break;
+            } else {
+                return thirdPlayer.draw((BJDeck.dealCard()));
+            }
+        }
+        return draw;
+    }
+    public boolean fourthPlayerDraw() {
+        while (true) {
+            if (fourthPlayer.getname() == null) {
+                break;
+            } else {
+                return fourthPlayer.draw((BJDeck.dealCard()));
+            }
+        }
+        return draw;
+    }
+    public boolean firstPersonHitOrStay(String response) {
+        if (response.compareToIgnoreCase("H") == 0) {
+            firstPlayerDone = !firstPlayerDraw();
+            firstPlayer.cardReveal(true);
+        } else if (response.compareToIgnoreCase("S") == 0) {
+            firstPlayerDone = true;
+        }
+        return firstPlayerDone;
+    }
+    public boolean secondPersonHitOrStay(String response) {
+        if (response.compareToIgnoreCase("H") == 0) {
+            secondPlayerDone = !secondPlayerDraw();
+            secondPlayer.cardReveal(true);
+        } else if (response.compareToIgnoreCase("S") == 0) {
+            secondPlayerDone = true;
+        }
+        return secondPlayerDone;
+    }
+    public boolean thirdPersonHitOrStay(String response) {
+        if (response.compareToIgnoreCase("H") == 0) {
+            thirdPlayerDone = !thirdPlayerDraw();
+            thirdPlayer.cardReveal(true);
+        } else if (response.compareToIgnoreCase("S") == 0) {
+            thirdPlayerDone = true;
+        }
+        return thirdPlayerDone;
+    }
+    public boolean fourthPersonHitOrStay(String response) {
+        if (response.compareToIgnoreCase("H") == 0) {
+            fourthPlayerDone = !fourthPlayerDraw();
+            fourthPlayer.cardReveal(true);
+        } else if (response.compareToIgnoreCase("S") == 0) {
+            fourthPlayerDone = true;
+        }
+        return fourthPlayerDone;
+    }
+    public boolean dealerHitOrStay() {
+        if (dealer.getHandSum() < 17) {
+            System.out.println("Dealer hits\n");
+            dealerDone = !dealer.draw(BJDeck.dealCard());
+            dealer.cardReveal(false);
+        } else {
+            System.out.println("Dealer stays\n");
+            dealerDone = true;
+        }
+        return dealerDone;
+    }
+    public void handReveal() {
+        firstPlayer.cardReveal(true);
+        System.out.print("\n");
+        secondPlayer.cardReveal(true);
+        System.out.print("\n");
+        thirdPlayer.cardReveal(true);
+        System.out.print("\n");
+        fourthPlayer.cardReveal(true);
+        System.out.print("\n");
     }
 }
 

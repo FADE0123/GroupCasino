@@ -1,22 +1,26 @@
 package com.github.zipcodewilmington.casino.players;
 
-import com.github.zipcodewilmington.Casino;
-import com.github.zipcodewilmington.casino.CasinoAccount;
-import com.github.zipcodewilmington.casino.CasinoAccountManager;
-import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.*;
+import com.github.zipcodewilmington.casino.games.RouletteGame;
 
 /**
  * Created by leon on 7/21/2020.
  */
-public class RoulettePlayer extends Player implements PlayerInterface {
+public class RoulettePlayer extends Player {
+    CasinoAccount account;
+    RouletteGame rouletteGame;
+    public RoulettePlayer() {
+        getArcadeAccount();
+    }
     @Override
     public CasinoAccount getArcadeAccount() {
-        return null;
+        account = CasinoAccountManager.casinoAccountList.get(0);
+        return account;
     }
 
     @Override
-    public <SomeReturnType> SomeReturnType play() {
-        return null;
+    public <RouletteGame> RouletteGame play() {
+        return (RouletteGame) rouletteGame;
     }
 
 }
