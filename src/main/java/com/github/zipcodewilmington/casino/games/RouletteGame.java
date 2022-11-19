@@ -1,7 +1,6 @@
 package com.github.zipcodewilmington.casino.games;
 import com.github.zipcodewilmington.Casino;
-import com.github.zipcodewilmington.casino.GameInterface;
-import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.*;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -9,7 +8,7 @@ public class RouletteGame implements GameInterface {
 
     Scanner keyboard = new Scanner(System.in);
 
-    int total = 10;
+    int total;
     int amount;
     int choice, win = 0, lose = 0, spin = 0;
     int number;
@@ -17,12 +16,15 @@ public class RouletteGame implements GameInterface {
     int result;
     char response;
     int resultArr[] = new int[37];
+    CasinoAccount player;
 
     public RouletteGame() {
+        player = CasinoAccountManager.casinoAccountList.get(0);
         run();
     }
     @Override
     public void add(PlayerInterface player) {
+
     }
     @Override
     public void run() {
@@ -62,12 +64,16 @@ public class RouletteGame implements GameInterface {
             System.out.printf("You have won  \n", result * amount);
             System.out.printf("Here's your money back:  \n", (result + 1) * amount);
             total = (result + 1) * amount + total;
+            player.addAccountBalance(total);
+            player.addSecurityLevel();
+            player.kickedOutBySecurity();
             win++;
             resultArr[rouletteNum]++;
         } else {
             System.out.println("You lose. Better luck next time!");
             System.out.printf("You have lost  \n", (result + 1) * amount);
-            total = total - (result + 1) * (amount);
+            total = (result + 1) * amount + total;
+            player.subtractAccountBalance(total);
             lose++;
             resultArr[rouletteNum]++;
 //                    if (total <= 0) {
@@ -79,7 +85,7 @@ public class RouletteGame implements GameInterface {
                 System.out.println("The Number " + totals + " won " + resultArr[totals] + " times.");
             }
         }
-        System.out.println("You have " + total + " remaining.");
+        System.out.println("You have " + player.getAccountBalance() + " remaining.");
         System.out.println("You have won " + win + " games.");
         System.out.println("you have lost " + lose + " games.");
         System.out.println("The wheel has been spun " + spin + " times.");
