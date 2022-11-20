@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class CasinoAccount {
     Random random = new Random();
-    int ranNum = random.nextInt(50)+10;
+    int ranNum = random.nextInt(10)+5;
     Timer timer;
     TimerTask timerTask;
     private String accountName;
@@ -87,7 +87,6 @@ public class CasinoAccount {
         else return false;
     }
     public void kickedOutBySecurity() {
-        System.out.println(ranNum);
         if (securityLevel == ranNum) {
             console.println("YOU HAVE BEEN ACTING VERY SUSPICIOUSLY AND THE SECURITY TEAM KICKS YOU OUT!");
             System.exit(1); //terminates the run
@@ -97,4 +96,5 @@ public class CasinoAccount {
         addSecurityLevel();
         kickedOutBySecurity();
     }
+
 }

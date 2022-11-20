@@ -23,7 +23,7 @@ public class Casino implements Runnable {
         String arcadeDashBoardInput;
         do {
             arcadeDashBoardInput = getArcadeDashboardInput();
-            if ("2".equals(arcadeDashBoardInput)|| "select game".equalsIgnoreCase(arcadeDashBoardInput)) {
+            if ("3".equals(arcadeDashBoardInput)|| "select game".equalsIgnoreCase(arcadeDashBoardInput)) {
                 this.casinoAccount = casinoAccountManager.getAccount(CasinoAccountManager.casinoAccountList.get(0).getAccountName(), CasinoAccountManager.casinoAccountList.get(0).getAccountPassword());
                 accountPassword = console.getStringInput("To make sure you're not too drunk, please enter your account password:");
                 securityCheck(accountPassword);
@@ -66,12 +66,9 @@ public class Casino implements Runnable {
                                     exit.println("TIME TO GO!");
                                     System.exit(1);
                                 }
-                        case 6:
-                            play(new HighLowGame(), new HighLowPlayer());
-                            break;
-//                        case 7:
-//                            play(new GoFishGame(), new GoFishPlayer());
-//                            break;
+                            case 6:
+                                play(new HighLowGame(), new HighLowPlayer());
+                                break;
                             case 8:
                                 console.println("Thank you for your money!");
                                 System.exit(1);
@@ -94,7 +91,7 @@ public class Casino implements Runnable {
                 accountPassword = console.getStringInput("Enter your account password:");
                 CasinoAccount newAccount = casinoAccountManager.createAccount(accountName, accountPassword);
                 casinoAccountManager.registerAccount(newAccount);
-            } if ("3".equals(arcadeDashBoardInput)|| "add balance from atm".equalsIgnoreCase(arcadeDashBoardInput)) {
+            } if ("2".equals(arcadeDashBoardInput)|| "add balance from atm".equalsIgnoreCase(arcadeDashBoardInput)) {
                 this.casinoAccount = casinoAccountManager.getAccount(CasinoAccountManager.casinoAccountList.get(0).getAccountName(), CasinoAccountManager.casinoAccountList.get(0).getAccountPassword());
                 accountPassword = console.getStringInput("To make sure you're not too drunk, please enter your account password:");
                 securityCheck(accountPassword);
@@ -109,7 +106,20 @@ public class Casino implements Runnable {
                         throw new RuntimeException(e);
                     }
                 }
-            } else if ("4".equals(arcadeDashBoardInput) || "exit casino".equalsIgnoreCase(arcadeDashBoardInput)) {
+            } else if ("4".equals(arcadeDashBoardInput) || "save account".equalsIgnoreCase(arcadeDashBoardInput)) {
+                try {
+                    casinoAccountManager.accountSaver();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            } else if ("5".equals(arcadeDashBoardInput) || "load account".equalsIgnoreCase(arcadeDashBoardInput)) {
+                casinoAccountManager.accountLoader();
+            } else if ("6".equals(arcadeDashBoardInput) || "see all accounts name".equalsIgnoreCase(arcadeDashBoardInput)) {
+                for (int i = 0; i < CasinoAccountManager.casinoAccountList.size(); i++) {
+                    System.out.println(CasinoAccountManager.casinoAccountList.get(i).getAccountName());
+                }
+            }
+            else if ("7".equals(arcadeDashBoardInput) || "exit casino".equalsIgnoreCase(arcadeDashBoardInput)) {
                 console.println("Thank you for your money!");
                 System.exit(1);
             }
@@ -120,7 +130,8 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the F.A.D.E. Casino!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ 1: CREATE ACCOUNT ], [ 2: SELECT GAME ], [ 3: ADD BALANCE FROM ATM ], [ 4: EXIT CASINO ]")
+                .append("\n\t[ 1: CREATE ACCOUNT ], [ 2: ADD BALANCE FROM ATM  ], [ 3: SELECT GAME  ], [ 4: SAVE ACCOUNT]")
+                .append("\n\t[ 5:  LOAD  ACCOUNT ], [ 6: SEE ALL ACCOUNTS NAME ], [ 7: EXIT CASINO  ]")
                 .toString());
     }
 

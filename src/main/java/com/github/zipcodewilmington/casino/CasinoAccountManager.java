@@ -1,5 +1,6 @@
 package com.github.zipcodewilmington.casino;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +33,50 @@ public class CasinoAccountManager {
         registerAccount(newAccount);
         return newAccount;
     }
+    public CasinoAccount loadAccount(String accountName, String accountPassword, int accountBalance) {
+
+        CasinoAccount newAccount = new CasinoAccount(accountName, accountPassword, accountBalance);
+        registerAccount(newAccount);
+        return newAccount;
+    }
     public List<CasinoAccount> registerAccount (CasinoAccount newAccount) {
         this.casinoAccountList.add(newAccount);
         return this.casinoAccountList;
+    }
+    public void accountSaver() throws IOException {
+        String line = "";
+        CasinoAccount account;
+        BufferedWriter save = new BufferedWriter(new FileWriter("AccountSave.txt", true));
+        BufferedReader reader = new BufferedReader((new FileReader("AccountSave.txt")));
+        while((line = reader.readLine()) != null) {
+            for(int i = 0; i < casinoAccountList.size(); i++) {
+                account = casinoAccountList.get(i);
+                String id = account.getAccountName();
+                String pass = account.getAccountPassword();
+                int balance = account.getAccountBalance();
+                save.write(String.format("%s,%s,%s\n",id,pass,balance));
+                System.out.println("Saved");
+            }
+        }
+        save.close();
+    }
+    public void accountLoader() {
+        String line = "";
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("AccountSave.txt"));
+            while((line = reader.readLine()) != null) {
+                String[] separate = line.split(",");
+                for (int i = 0; i < separate.length/3; i++) {
+                    String id = separate[0];
+                    String pass = separate[1];
+                    int balance = Integer.parseInt(separate[2]);
+                    loadAccount(id, pass, balance);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
