@@ -1,6 +1,7 @@
 package com.github.zipcodewilmington.casino.games;
 import com.github.zipcodewilmington.Casino;
 import com.github.zipcodewilmington.casino.*;
+import com.github.zipcodewilmington.casino.players.RoulettePlayer;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -21,6 +22,8 @@ public class RouletteGame implements GameInterface {
     public RouletteGame() {
         player = CasinoAccountManager.casinoAccountList.get(0);
         run();
+        Casino casino = new Casino();
+        casino.run();
     }
     @Override
     public void add(PlayerInterface player) {
@@ -65,8 +68,7 @@ public class RouletteGame implements GameInterface {
             System.out.printf("Here's your money back:  \n", (result + 1) * amount);
             total = (result + 1) * amount + total;
             player.addAccountBalance(total);
-            player.addSecurityLevel();
-            player.kickedOutBySecurity();
+            player.securityPacket();
             win++;
             resultArr[rouletteNum]++;
         } else {
@@ -90,16 +92,9 @@ public class RouletteGame implements GameInterface {
         System.out.println("you have lost " + lose + " games.");
         System.out.println("The wheel has been spun " + spin + " times.");
         System.out.println("\n");
-        Casino casino = new Casino();
-        casino.run();
     }
-
-
-
-
     @Override
     public void remove(PlayerInterface player) {
-
     }
 }
 

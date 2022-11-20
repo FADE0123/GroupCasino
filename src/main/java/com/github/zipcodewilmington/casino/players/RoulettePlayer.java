@@ -1,5 +1,6 @@
 package com.github.zipcodewilmington.casino.players;
 
+import com.github.zipcodewilmington.Casino;
 import com.github.zipcodewilmington.casino.*;
 import com.github.zipcodewilmington.casino.games.RouletteGame;
 
@@ -9,13 +10,13 @@ import com.github.zipcodewilmington.casino.games.RouletteGame;
 public class RoulettePlayer extends Player {
     CasinoAccount account;
     RouletteGame rouletteGame;
+
     public RoulettePlayer() {
         getArcadeAccount();
     }
     @Override
     public CasinoAccount getArcadeAccount() {
-        account = CasinoAccountManager.casinoAccountList.get(0);
-        return account;
+        return account = CasinoAccountManager.casinoAccountList.get(0);
     }
 
     @Override
