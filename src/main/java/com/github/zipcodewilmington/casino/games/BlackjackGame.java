@@ -6,6 +6,7 @@ import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.players.BlackjackPlayer;
+import com.github.zipcodewilmington.casino.players.RoulettePlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
@@ -44,6 +45,8 @@ public class BlackjackGame implements GameInterface {
         add(thirdPlayer);
         add(fourthPlayer);
         run();
+        Casino casino = new Casino();
+        casino.run();
     }
 
     @Override
@@ -162,10 +165,6 @@ public class BlackjackGame implements GameInterface {
             player.subtractAccountBalance(total);
         }
         this.toggle = true;
-
-        System.out.println("\n");
-        Casino casino = new Casino();
-        casino.run();
     }
     public boolean firstPlayerDraw() {
         return firstPlayer.draw(BJDeck.dealCard());

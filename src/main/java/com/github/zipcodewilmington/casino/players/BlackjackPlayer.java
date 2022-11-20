@@ -11,13 +11,13 @@ public class BlackjackPlayer extends Player {
     private Cards[] hand = new Cards[5];
     private int numberCards;
     CasinoAccount account;
+    BlackjackGame blackjackGame;
 
     public BlackjackPlayer(String name) {
         this.name = name;
         this.emptyHand();
     }
     public BlackjackPlayer() {
-        account.getAccountName();
         getArcadeAccount();
     }
     public void emptyHand() {
@@ -76,12 +76,11 @@ public class BlackjackPlayer extends Player {
 
     @Override
     public CasinoAccount getArcadeAccount() {
-        account = CasinoAccountManager.casinoAccountList.get(0);
-        return account;
+        return account = CasinoAccountManager.casinoAccountList.get(0);
     }
 
     @Override
     public <BlackjackGame> BlackjackGame play() {
-        return play();
+        return (BlackjackGame) blackjackGame;
     }
 }

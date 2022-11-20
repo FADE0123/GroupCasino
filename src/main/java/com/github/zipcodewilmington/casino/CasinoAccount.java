@@ -39,6 +39,12 @@ public class CasinoAccount {
     public String getAccountPassword() {
         return accountPassword;
     }
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+    public void setAccountPassword(String accountPassword) {
+        this.accountPassword = accountPassword;
+    }
     public int getAccountBalance() {
         return accountBalance;
     }

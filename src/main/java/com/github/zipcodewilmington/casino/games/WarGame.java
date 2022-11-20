@@ -1,8 +1,12 @@
 package com.github.zipcodewilmington.casino.games;
 
+import com.github.zipcodewilmington.Casino;
 import com.github.zipcodewilmington.Deck;
+import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.players.RoulettePlayer;
 import com.github.zipcodewilmington.casino.players.WarPlayer;
 
 import java.util.Scanner;
@@ -10,18 +14,21 @@ import java.util.Scanner;
 public class WarGame implements GameInterface {
     int total;
     Scanner scanner = new Scanner(System.in);
-    int bet;
     char response = 'y';
     Deck deck = new Deck();
     WarPlayer player;
+    CasinoAccount account;
     WarPlayer dealer = new WarPlayer();
     public WarGame() {
-        add(this.player);
+        player = new WarPlayer();
+        account = CasinoAccountManager.casinoAccountList.get(0);
         run();
+        Casino casino = new Casino();
+        casino.run();
     }
     @Override
     public void add(PlayerInterface player) {
-        this.player = new WarPlayer("Player");
+
     }
 
     @Override
@@ -30,7 +37,7 @@ public class WarGame implements GameInterface {
             player.emptyHand();
             dealer.emptyHand();
             System.out.println("Welcome to War. Please enter your bet");
-            bet = scanner.nextInt();
+            total = scanner.nextInt();
             scanner.nextLine();
             deck.shuffle();
             player.draw(deck.dealCard());
@@ -41,9 +48,12 @@ public class WarGame implements GameInterface {
             int dealerSum = dealer.getHandSum();
 
             if (playerSum > dealerSum) {
+                account.addAccountBalance(total);
+                account.securityPacket();
                 System.out.println("Player wins! Would you like to play again? Y/N");
                 response = scanner.next().charAt(0);
             } else {
+                account.subtractAccountBalance(total);
                 System.out.println("Dealer wins! Would you like to play again? Y/N");
                 response = scanner.next().charAt(0);
             }

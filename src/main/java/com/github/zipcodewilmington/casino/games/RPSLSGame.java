@@ -4,6 +4,7 @@ import com.github.zipcodewilmington.Casino;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.players.RPSLSplayer;
+import com.github.zipcodewilmington.casino.players.RoulettePlayer;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -14,16 +15,15 @@ public class RPSLSGame implements GameInterface {
     Scanner scanner = new Scanner(System.in);
 
     public RPSLSGame() {
-        add(this.player);
+        player = new RPSLSplayer();
         run();
-        System.out.println("\n");
         Casino casino = new Casino();
         casino.run();
     }
 
     @Override
     public void add(PlayerInterface player) {
-        this.player = new RPSLSplayer("Player");
+
     }
 
     @Override
@@ -101,4 +101,3 @@ public class RPSLSGame implements GameInterface {
         }
     }
 }
-//}

@@ -1,17 +1,24 @@
 package com.github.zipcodewilmington.casino.players;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
-public class HighLowPlayer extends Player implements PlayerInterface {
+public class HighLowPlayer extends Player {
+    CasinoAccount account;
+    HighLowPlayer highLowPlayer;
 
+    public HighLowPlayer() {
+        getArcadeAccount();
+    }
     @Override
     public CasinoAccount getArcadeAccount() {
-        return null;
+        return account = CasinoAccountManager.casinoAccountList.get(0);
     }
 
     @Override
-    public <SomeReturnType> SomeReturnType play() {
-        return null;
+    public <RPSLSplayer> RPSLSplayer play() {
+        return (RPSLSplayer) highLowPlayer;
     }
+
 }
