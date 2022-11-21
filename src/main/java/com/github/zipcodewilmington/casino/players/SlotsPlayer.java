@@ -16,6 +16,7 @@ public class SlotsPlayer extends Player{
     public SlotsPlayer() {
         getArcadeAccount();
     }
+
     @Override
     public CasinoAccount getArcadeAccount() {
         return account = CasinoAccountManager.casinoAccountList.get(0);

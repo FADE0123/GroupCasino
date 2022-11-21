@@ -20,9 +20,11 @@ public class SlotsGame implements GameInterface {
     public SlotsGame() {
         player = CasinoAccountManager.casinoAccountList.get(0);
         run();
+        ifAllMatch();
         Casino casino = new Casino();
         casino.run();
     }
+
     @Override
     public void run() {
         //these are going to be displayed in the beginning of the game and player will input bet amount
@@ -38,15 +40,19 @@ public class SlotsGame implements GameInterface {
         slot3 = generator3;
         //this will print out the random numbers for each row in the slot
         System.out.println(slot1 + " " + slot2 + " " + slot3 + " ");
+        }
+
+
+    private void ifAllMatch() {
         //if all 3 slots have same number, you win
         if (slot1 == slot2 && (slot1 == slot3)) {
             System.out.println("You win double");
-            player.addAccountBalance(total*4);
+            player.addAccountBalance(total * 4);
             player.securityPacket();
             // if only 2 slots have same number, you win
         } else if (slot1 == slot2 || (slot1 == slot3) || (slot2 == slot3)) {
             System.out.println("You win");
-            player.addAccountBalance(total*2);
+            player.addAccountBalance(total * 2);
             player.securityPacket();
         } else {
             // no matches
@@ -57,10 +63,12 @@ public class SlotsGame implements GameInterface {
         Casino casino = new Casino();
         casino.run();
     }
+
+
     @Override
-    public void add(PlayerInterface player) {
+        public void add (PlayerInterface player){
+        }
+        @Override
+        public void remove (PlayerInterface player){
+        }
     }
-    @Override
-    public void remove(PlayerInterface player) {
-    }
-}

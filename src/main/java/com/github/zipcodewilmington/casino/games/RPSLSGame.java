@@ -6,6 +6,7 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.players.RPSLSplayer;
 import com.github.zipcodewilmington.casino.players.RoulettePlayer;
 
+import java.sql.SQLOutput;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -35,8 +36,6 @@ public class RPSLSGame implements GameInterface {
     public void run() {
         while (true) {
             String[] rpsls = {"rock", "paper", "scissors", "lizard", "spock", ";ja;dkja;wej;ak"};
-
-
             String playerMove;
 
             while (true) {
@@ -52,6 +51,7 @@ public class RPSLSGame implements GameInterface {
                 }
                 String computerMove = rpsls[new Random().nextInt(rpsls.length)];
                 System.out.println("Computer played: " + computerMove);
+
                 if (playerMove.equalsIgnoreCase(computerMove)) {
                     System.out.println("It's a tie!");
                 } else if (playerMove.equalsIgnoreCase("rock") &&
