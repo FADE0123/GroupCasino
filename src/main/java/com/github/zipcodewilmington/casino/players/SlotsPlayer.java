@@ -16,7 +16,10 @@ public class SlotsPlayer extends Player{
     public SlotsPlayer() {
         getArcadeAccount();
     }
-
+    public SlotsPlayer(String name, String password) {
+        super.setAccountName(name);
+        super.setAccountPassword(password);
+    }
     @Override
     public CasinoAccount getArcadeAccount() {
         return account = CasinoAccountManager.casinoAccountList.get(0);

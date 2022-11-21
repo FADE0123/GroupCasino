@@ -20,6 +20,10 @@ public class BlackjackPlayer extends Player {
     public BlackjackPlayer() {
         getArcadeAccount();
     }
+    public BlackjackPlayer(String name, String password) {
+        super.setAccountName(name);
+        super.setAccountPassword(password);
+    }
     public void emptyHand() {
         for (int i = 0; i < 5; i++) {
             this.hand[i] = null;

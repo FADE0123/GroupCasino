@@ -61,7 +61,6 @@ public class WarGame implements GameInterface {
     }
 
 
-
     @Override
     public void remove(PlayerInterface player) {
 
