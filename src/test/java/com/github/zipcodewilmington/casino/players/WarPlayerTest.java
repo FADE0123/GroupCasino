@@ -12,7 +12,7 @@ class WarPlayerTest {
 
     @Test
     public void emptyHandTest(){
-        WarPlayer player = new WarPlayer();
+        WarPlayer player = new WarPlayer("Player");
         Cards card = new Cards(Suits.SPADES, 1);
         player.draw(card);
         assertEquals(1, player.getNumberCards());
@@ -21,14 +21,14 @@ class WarPlayerTest {
     }
     @Test
     public void drawTest(){
-        WarPlayer player = new WarPlayer();
+        WarPlayer player = new WarPlayer("Player");
         Deck deck = new Deck();
         player.draw(deck.dealCard());
         assertEquals(1, player.getNumberCards());
     }
     @Test
     public void getHandSumTest(){
-        WarPlayer player = new WarPlayer();
+        WarPlayer player = new WarPlayer("Player");
         Deck deck = new Deck();
         player.draw(deck.dealCard());
         player.draw(deck.dealCard());
@@ -37,14 +37,14 @@ class WarPlayerTest {
     }
     @Test
     public void getHandTest(){
-        WarPlayer player = new WarPlayer();
+        WarPlayer player = new WarPlayer("Player");
         Deck deck = new Deck();
         player.draw(deck.dealCard());
         assertEquals("Ace of CLUBS", player.getHand(0).toString());
     }
     @Test
     public void getNumberCardsTest(){
-        WarPlayer player = new WarPlayer();
+        WarPlayer player = new WarPlayer("Player");
         Deck deck = new Deck();
         player.draw(deck.dealCard());
         assertEquals(1, player.getNumberCards());

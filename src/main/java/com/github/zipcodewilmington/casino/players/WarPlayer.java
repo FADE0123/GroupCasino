@@ -17,6 +17,10 @@ public class WarPlayer extends Player {
     public WarPlayer() {
         getArcadeAccount();
     }
+    public WarPlayer(String name) {
+        this.name = name;
+        this.emptyHand();
+    }
 
     public void emptyHand() {
         for (int i = 0; i < 5; i++) {

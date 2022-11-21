@@ -48,7 +48,9 @@ public class BlackjackGame implements GameInterface {
         Casino casino = new Casino();
         casino.run();
     }
+    public BlackjackGame(String name) {
 
+    }
     @Override
     public void add(PlayerInterface player) {
         firstPlayer = new BlackjackPlayer(CasinoAccountManager.casinoAccountList.get(0).getAccountName());
