@@ -7,12 +7,15 @@ import com.github.zipcodewilmington.casino.games.RPSLSGame;
 import com.github.zipcodewilmington.casino.games.SlotsGame;
 
 public class RPSLSplayer extends Player {
-
     CasinoAccount account;
     RPSLSGame rpslsGame;
 
     public RPSLSplayer() {
         getArcadeAccount();
+    }
+    public RPSLSplayer(String name, String password) {
+        super.setAccountName(name);
+        super.setAccountPassword(password);
     }
     @Override
     public CasinoAccount getArcadeAccount() {

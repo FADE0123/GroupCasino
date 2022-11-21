@@ -11,6 +11,10 @@ public class HighLowPlayer extends Player {
     public HighLowPlayer() {
         getArcadeAccount();
     }
+    public HighLowPlayer(String name, String password) {
+        super.setAccountName(name);
+        super.setAccountPassword(password);
+    }
     @Override
     public CasinoAccount getArcadeAccount() {
         return account = CasinoAccountManager.casinoAccountList.get(0);

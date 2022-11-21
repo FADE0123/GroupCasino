@@ -88,10 +88,6 @@ public class CasinoAccount {
     public void subtractAccountBalance(int amount) {
         accountBalance -= amount;
     }
-    public boolean checkAccountBalance(double amount) {
-        if (accountBalance >= amount) return true;
-        else return false;
-    }
     public void kickedOutBySecurity() {
         if (securityLevel == ranNum) {
             console.println("YOU HAVE BEEN ACTING VERY SUSPICIOUSLY AND THE SECURITY TEAM KICKS YOU OUT!");
